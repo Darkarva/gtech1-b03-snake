@@ -8,7 +8,9 @@ Window::Window(){
 }
 
 Window::~Window(){
-
+    SDL_DestroyRenderer(pgRenderer);
+    SDL_DestroyWindow(this->window);
+    SDL_Quit();
 }
 
 void Window::ExitWithError(const char *message){
@@ -16,26 +18,25 @@ void Window::ExitWithError(const char *message){
     SDL_Quit();
 }
 
+SDL_Renderer *Window::GetRenderer(void){
+    return this->pgRenderer;
+}
+
 void Window::InitWin(){
     if(SDL_Init(SDL_INIT_VIDEO) != 0){
         ExitWithError("SDL init failed.");
     }
 
-    playground = SDL_CreateWindow("Snake", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, 0);
+    this->window = SDL_CreateWindow("Snake", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, 0);
 
-    if(playground == NULL){
+    if(this->window == NULL){
         ExitWithError("Window creation failed.");
     }
 
-    pgRenderer = SDL_CreateRenderer(playground, -1, SDL_RENDERER_ACCELERATED);
+    pgRenderer = SDL_CreateRenderer(this->window, -1, SDL_RENDERER_ACCELERATED);
 
      if(pgRenderer == NULL){
         ExitWithError("Window creation failed.");
     }
 }
 
-void Window::DestroyWin(){
-    SDL_DestroyRenderer(pgRenderer);
-    SDL_DestroyWindow(playground);
-    SDL_Quit();
-}

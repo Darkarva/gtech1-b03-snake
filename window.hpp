@@ -11,11 +11,11 @@ class Window{
 
         void ExitWithError(const char *message);
         void InitWin();
-        void DestroyWin();
-        SDL_Renderer GetRenderer(void);
+        //void DestroyWin();
+        SDL_Renderer *GetRenderer(void);
 
     private: 
-        SDL_Window *playground;
+        SDL_Window *window;
         SDL_Renderer *pgRenderer;
         
 };

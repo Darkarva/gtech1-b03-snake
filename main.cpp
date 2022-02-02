@@ -46,13 +46,17 @@ int main(int argc, char *argv[])
                     break;
             }
         }
+        
+        SDL_SetRenderDrawColor(snakeWindow.GetRenderer(), 255, 0, 0, 255);
+        SDL_Rect rect = {400, 300, 20, 20};
+        SDL_RenderFillRect(snakeWindow.GetRenderer(), &rect);
+        SDL_RenderPresent(snakeWindow.GetRenderer());
 
-        SDL_LimitFPS(frame_limit);
-        frame_limit = SDL_GetTicks() + FPS_LIMIT;
+        SDL_Delay(20);
+        // frame_limit = SDL_GetTicks() + FPS_LIMIT;
+        // SDL_LimitFPS(frame_limit); 
 
     }
-
-    snakeWindow.DestroyWin();
 }
 
 void SDL_LimitFPS(unsigned int limit){
@@ -68,3 +72,24 @@ void SDL_LimitFPS(unsigned int limit){
         SDL_Delay(limit - ticks);
     }
 }
+
+// void Snake::print(){
+
+//     SDL_RenderClear(pgRenderer);
+
+//     SDL_Rect rectangle;
+//     rectangle.x = posX;
+//     rectangle.y = posY;
+//     rectangle.w = HEAD_SIZE;
+//     rectangle.h = HEAD_SIZE;
+
+//     if(SDL_RenderFillRect(pgRenderer, &rectangle) != 0){
+//         ExitWithError("Impossible de dessiner un rectangle");
+//     }
+
+//     if(SDL_SetRenderDrawColor(pgRenderer, 255, 0, 0, 255) != 0){
+//         ExitWithError("Impossible de changer la couleur pour le rendu");
+//     }
+
+//     SDL_RenderPresent(pgRenderer);
+// }

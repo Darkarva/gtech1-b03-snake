@@ -1,8 +1,8 @@
 #include <SDL2/SDL.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "snake.hpp"
 #include "window.hpp"
+#include "snake.hpp"
 
 
 Snake::Snake(){
@@ -77,29 +77,4 @@ void Snake::move(int direction){
         if (posX >= 800 - 40)
             posX = 800 - 40;
     }
-}
-
-void Snake::print(){
-
-    SDL_RenderClear(pgRenderer);
-
-    if(SDL_SetRenderDrawColor(pgRenderer, 144, 28, 68, 255) != 0){
-        Window::ExitWithError("Impossible de changer la couleur pour le rendu");
-    }
-
-    SDL_Rect rectangle;
-    rectangle.x = posX;
-    rectangle.y = posY;
-    rectangle.w = HEAD_SIZE;
-    rectangle.h = HEAD_SIZE;
-
-    if(SDL_RenderFillRect(pgRenderer, &rectangle) != 0){
-        ExitWithError("Impossible de dessiner un rectangle");
-    }
-
-    if(SDL_SetRenderDrawColor(pgRenderer, 0, 0, 0, 255) != 0){
-        ExitWithError("Impossible de changer la couleur pour le rendu");
-    }
-
-    SDL_RenderPresent(pgRenderer);
 }
